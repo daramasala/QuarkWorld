@@ -8,7 +8,7 @@ namespace QuarkWorld
 {
     public class PhaserQuark : Quark
     {
-        public PhaserQuark() : base('%', ConsoleColor.Magenta)
+        public PhaserQuark(int width, int height) : base('%', ConsoleColor.Magenta, width, height)
         {
         }
 

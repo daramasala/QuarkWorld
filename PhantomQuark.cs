@@ -30,13 +30,11 @@ namespace QuarkWorld
             }
         }
 
-        public PhantomQuark() : base('@', ConsoleColor.Blue)
+        public PhantomQuark(int width, int height) : base('@', ConsoleColor.Blue, width, height)
         {
-            while (VelocityX == 0 && VelocityY == 0)
-            {
-                VelocityX = 1 - Simulation.Rand.Next(3);
-                VelocityY = 1 - Simulation.Rand.Next(3);
-            }
+            var tuple = Simulation.NonZeroRandomTuple(-1, 2);
+            VelocityX = tuple.Item1;
+            VelocityY = tuple.Item2;
         }
     }
 }

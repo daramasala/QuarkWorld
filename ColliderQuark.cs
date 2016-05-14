@@ -24,13 +24,11 @@ namespace QuarkWorld
             Y += VelocityY;
         }
 
-        public ColliderQuark() : base('O', ConsoleColor.Red)
+        public ColliderQuark(int width, int height) : base('O', ConsoleColor.Red, width, height)
         {
-            while (VelocityX == 0 && VelocityY == 0)
-            {
-                VelocityX = 1 - Simulation.Rand.Next(3);
-                VelocityY = 1 - Simulation.Rand.Next(3);
-            }
+            var tuple = Simulation.NonZeroRandomTuple(-1, 2);
+            VelocityX = tuple.Item1;
+            VelocityY = tuple.Item2;
         }
     }
 }

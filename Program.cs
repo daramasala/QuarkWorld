@@ -11,11 +11,11 @@ namespace QuarkWorld
         const int Width = 80;
         const int Height = 25;
 
-        private static readonly Func<Quark>[] QuarkFactories = 
+        private static readonly Func<int, int, Quark>[] QuarkFactories = 
             {
-                () => new PhantomQuark(),
-                () => new ColliderQuark(),
-                () => new PhaserQuark()
+                (w, h) => new PhantomQuark(w, h),
+                (w, h) => new ColliderQuark(w, h),
+                (w, h) => new PhaserQuark(w, h)
             };
 
         private static readonly TimeSpan SleepTime = TimeSpan.FromMilliseconds(100);
@@ -26,12 +26,20 @@ namespace QuarkWorld
             for (int i = 0; i < quarks.Length; i++)
             {
                 var factoryIndex = Rand.Next(QuarkFactories.Length);
-                var quark = QuarkFactories[factoryIndex]();
-                quark.X = Rand.Next(Width);
-                quark.Y = Rand.Next(Height - 1);
+                var quark = QuarkFactories[factoryIndex](Width, Height -1);
                 quarks[i] = quark;
             }
             return quarks;
+        }
+
+        public static Tuple<int, int> NonZeroRandomTuple(int min, int max)
+        {
+            Tuple<int, int> result;
+            do
+            {
+                result = new Tuple<int, int>(Rand.Next(min, max), Rand.Next(min, max));
+            } while (result.Item1 == 0 && result.Item2 == 0);
+            return result;
         }
 
         public void Run()

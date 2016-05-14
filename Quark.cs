@@ -4,18 +4,20 @@ namespace QuarkWorld
 {
     public abstract class Quark
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        protected int X { get; set; }
+        protected int Y { get; set; }
         protected int VelocityX { get; set; }
         protected int VelocityY { get; set; }
 
         private readonly char sprite;
         private readonly ConsoleColor color;
 
-        protected Quark(char sprite, ConsoleColor color)
+        protected Quark(char sprite, ConsoleColor color, int width, int height)
         {
             this.sprite = sprite;
             this.color = color;
+            X = Simulation.Rand.Next(width);
+            Y = Simulation.Rand.Next(height);
         }
 
         public abstract void Update(World world);
